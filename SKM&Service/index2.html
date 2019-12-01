@@ -23,8 +23,7 @@
   <!-- Page level custom scripts -->
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
-  <script src="js/neovis.js"></script>  <!--neovis neo4j에 있는 것을 그래프로 옮겨옴  //-->
-  
+  <script src="js/neovis.js"></script> <!-- neovis neo4j에 있는 것을 그래프로 옮겨옴  //-->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
   <script src='js/excelexportjs.js'></script>
   <script integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> <!-- 보안상의 이유로 필요하다는 듯 하다 -->
@@ -37,13 +36,11 @@
   <style>
   #jb-content {
       width: 100%;
-      height: 800px;
+      height: 700px;
   }
-  
   #viz{
       width: 100%;
-      height: 800px;
-      font-size:10px;
+      height: 700px;
   }
   #jb-length{
 
@@ -75,59 +72,23 @@
       display: inline-block;
       width: 10em;
   }
-node {
-  diameter: 50px;
-  color: #A5ABB6;
-  border-color: #9AA1AC;
-  border-width: 2px;
-  text-color-internal: #FFFFFF;
-  font-size: 10px;
-}
 
-relationship {
-  color: #A5ABB6;
-  shaft-width: 1px;
-  font-size: 8px;
-  padding: 3px;
-  text-color-external: #000000;
-  text-color-internal: #FFFFFF;
-  caption: '<type>';
-}
-
-node.Department {
-  color: #2B7A78;
-  border-color: #2B7A78;
-  text-color-internal: #FFFFFF;
-  caption: '{title}';
-}
-
-node.Method {
-  color: #2B7A78;
-  border-color: #2B7A78;
-  text-color-internal: #FFFFFF;
-  caption: '{name}';
-} 
   </style>
 </head>
   <script> 
   var num=1; //연관 거리  default= 3
   var limit_num=50; // 연관 상품 최대 출력 개수 default=250
   var search_text="몽벨"; // 연관 상품 검색 default= "몽벨"
-  var jsoned4="1151183"; // 상품 ID default= 1151183
-  var center_of_graph="1151183";
+  var jsoned3=1151183; // 상품 ID default= 1151183
+  var center_of_graph=1151183;
   var searched="SKM&Service";
-  var linkofsearch="https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query="+searched;
   var File_info_Json_Array= new Array();
   var File_info_Json_Array_Check= new Array();
   var File_info_Json_Array_Final = new Array();
   var data = JSON.stringify(File_info_Json_Array);
-  var temp;
-  //var got_table_temp = location.href.split("?");
-  //var got_table_data=got_table_temp[1].split(":");
-  //var gotbytable = decodeURI(decodeURIComponent(got_table_data[0]));
-  //if(gotbytable!=null){
-  //  center_of_graph=gotbytable;
-  //}
+  
+  var temp; 
+
   function reDraw(){
 	  num = $("#depth").val();
 	  limit_num = $("#maxCnt").val();
@@ -171,10 +132,11 @@ node.Method {
 	function search_ioput(){ 
 	  var input = document.getElementById("search_input").value; 
 	  search_text=input;
-	  location.href="tables.html?" + encodeURI(encodeURIComponent(input))+":"+encodeURI(encodeURIComponent(input));
+	  draw_by_name();
 	}  
 
 	function ZoomIn (event) {
+
 	    $("#viz").width(
 	        $("#viz").width() * 1.2
 	    );
@@ -210,7 +172,7 @@ node.Method {
 	}
   </script>
   
-<body id="page-top">
+<body id="page-top" onload="draw()">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -255,6 +217,7 @@ node.Method {
 			<a href="#;" onClick="ZoomOut();">화면축소</a>&nbsp;|&nbsp; 
 			<a href="#;" onClick="openFullScreenMode();">전체화면</a> 
 		  </div>
+
         </nav>
         <!-- End of Topbar -->
 
@@ -270,10 +233,7 @@ node.Method {
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">
-                  <div id="jb-length" class="jb-length" style="display:inline-block"><h6 id="lengthInfo" class="m-0 text-info"></h6></div>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<div id="jb-footer" class="jb-footer" style="display:inline-block"><h6 id="eventSpan" class="m-0 "></h6></div>                  
-                  </h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Graph</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -288,8 +248,8 @@ node.Method {
                   </div>
                 </div>
                 <div class="card-body" >
-                  <div id="jb-content">
-                          <div id="viz" style="font-size:9px">검색어를 입력하세요</div> 
+                  <div id="jb-content" class="col-xl-8 col-lg-12">
+                          <div id="viz" float=middle></div> 
                   </div>
                 </div>
               </div>

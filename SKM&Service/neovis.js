@@ -145,9 +145,9 @@ if(false) {
                         OPTIONAL MATCH (n)-[r]-(m)
                         //WITH n,r,m WHERE exists(n.pagerank) AND exists(m.pagerank) AND exists(m.community)
                         RETURN n, r, m;`,
-        neo4jUri: "bolt://localhost:7687",
+        neo4jUri: "bolt://localhost:11001",
         neo4jUser: "neo4j",
-        neo4jPassword: "neo4j",
+        neo4jPassword: "pass@word1",
         encrypted: "ENCRYPTION_OFF",
         trust: "TRUST_ALL_CERTIFICATES"
     },
@@ -36807,7 +36807,7 @@ class NeoVis {
                     var jsoned2= JSON.stringify(self._data.nodes._data[jsoned]['title'],null,4);
                     jsoned=JSON.stringify(self._data.nodes._data[jsoned]['label'],null,4);
                     jsoned2=jsoned2.split("</strong>");
-                    jsoned2=jsoned2[5];
+                    jsoned2=jsoned2[2];
                     jsoned2=jsoned2.split("<br>");
                     jsoned2=jsoned2[0];
                     jsoned2=jsoned2.split(" ");
@@ -36838,7 +36838,7 @@ class NeoVis {
                     var jsoned2= JSON.stringify(self._data.nodes._data[jsoned]['title'],null,4);
                     jsoned=JSON.stringify(self._data.nodes._data[jsoned]['label'],null,4);
                     jsoned2=jsoned2.split("</strong>");
-                    jsoned2=jsoned2[5];
+                    jsoned2=jsoned2[2];
                     jsoned2=jsoned2.split("<br>");
                     jsoned2=jsoned2[0];
                     jsoned2=jsoned2.split(" ");
@@ -36847,7 +36847,7 @@ class NeoVis {
 
 
                  if(center_of_graph!=jsoned2){
-                  const driver = __WEBPACK_IMPORTED_MODULE_0__vendor_neo4j_javascript_driver_lib_browser_neo4j_web_js__["v1"].driver("bolt://localhost:7687", __WEBPACK_IMPORTED_MODULE_0__vendor_neo4j_javascript_driver_lib_browser_neo4j_web_js__["v1"].auth.basic("neo4j", "2seungyeol!"));
+                  const driver = __WEBPACK_IMPORTED_MODULE_0__vendor_neo4j_javascript_driver_lib_browser_neo4j_web_js__["v1"].driver("bolt://localhost11001", __WEBPACK_IMPORTED_MODULE_0__vendor_neo4j_javascript_driver_lib_browser_neo4j_web_js__["v1"].auth.basic("neo4j", "1234"));
                   const session = driver.session();
 
                   const resultPromise = session.run(
